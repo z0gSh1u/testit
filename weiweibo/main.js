@@ -1,4 +1,4 @@
-// DAO of weiweibo.
+// Pseudo backend of weiweibo.
 // by z0gSh1u @ 2020-02-29
 
 const fs = require('fs')
@@ -61,6 +61,7 @@ function newTweet(username, content) {
   fs.writeFileSync(TWEETTABLE_PATH, JSON.stringify(tweetTable))
   return 0
 }
+module.exports.newTweet = newTweet
 
 /**
  * 获取某用户的全部微博。
@@ -72,6 +73,7 @@ function fetchTweetByUsername(username) {
   if (!tweetTable[username]) return []
   return tweetTable[username]
 }
+module.exports.fetchTweetByUsername = fetchTweetByUsername
 
 /**
  * 获取所有用户的微博。
@@ -81,3 +83,4 @@ function fetchTweetAll() {
   let tweetTable = JSON.parse(fs.readFileSync(TWEETTABLE_PATH))
   return tweetTable
 }
+module.exports.fetchTweetAll = fetchTweetAll
