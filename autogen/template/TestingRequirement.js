@@ -8,6 +8,20 @@ function insertRow4Table(tableId){
     return tr
 }
 
+function insertRow4PerformanceTable(tableId){
+    table = document.getElementById(tableId)
+    tr = table.insertRow(table.rows.length)
+    for(var i=0;i < table.rows.item(0).cells.length;i++){
+        td = tr.insertCell(i)
+        if(i > 0){
+            td.contentEditable = true
+        }else{
+            td.innerHTML = "<select><option value='useablities'>可用性</option><option value='safety'>安全性</option><option value='performance'>性能</option><option value='runningEnvironment'>运行环境</option></select>"
+        }
+    }
+    return tr
+}
+
 function deleteRow4Table(tableId){
     table = document.getElementById(tableId)
     trAmt = table.rows.length
@@ -19,7 +33,7 @@ function deleteRow4Table(tableId){
 newTableCnt = 0
 newDivCnt = 0
 function createRequirements(divId){
-    newDiv = document.createElement("requirement")
+    newDiv = document.createElement("div")
     newDiv.id = "requirement" + newDivCnt++
     document.getElementById(divId).appendChild(newDiv)
     newDiv.innerHTML += "<b>功能需求" + newDivCnt + "：</b><button onclick=\"deleteRequirements('" + newDiv.id + "')\">删除</button>"

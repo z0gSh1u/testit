@@ -64,9 +64,31 @@
     <tbody>
     </tbody>
   </table>
-  <button onclick="insertRow4Table('performanceTable')">十</button>   <button onclick="deleteRow4Table('performanceTable')">一</button>
+  <button onclick="insertRow4PerformanceTable('performanceTable')">十</button>   <button onclick="deleteRow4Table('performanceTable')">一</button>
   <br/>
   <br/>
 
-  <button>提交</button>
+  测试规格评估：
+  <table border="1" id="testTable">
+    <thead>
+      <tr>
+        <th>
+          序号
+        </th>
+        <th>
+          测试类型
+        </th>
+        <th>
+          测试用例密度
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+  <button onclick="insertRow4Table('testTable')">十</button>   <button onclick="deleteRow4Table('testTable')">一</button>
+  <br/>
+  <br/>
+
+  <button onclick="alert(JSON.stringify(requirement2JSON()))">提交</button>
 </html>
