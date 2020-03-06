@@ -12,7 +12,7 @@ function requirement2JSON(){
         "requirements": [],
         "performance": {
             "useablities": [],
-            "safty": [],
+            "safety": [],
             "performance": [],
             "runningEnvironment": []
         },
