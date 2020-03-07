@@ -1,12 +1,12 @@
-function requirement2JSON(){
+function requirement2JSON() {
     var json = {
         "projectIntroduction": {
-            "projectName": document.getElementById("projectNameText").value, 
-            "projectTeam": document.getElementById("projectTeamText").value, 
+            "projectName": document.getElementById("projectNameText").value,
+            "projectTeam": document.getElementById("projectTeamText").value,
             "writer": document.getElementById("writerText").value,
             "completionDate": document.getElementById("completionDateText").value,
-            "background": document.getElementById("projectBackgroundTextarea").value, 
-            "introduction": document.getElementById("projectIntroductionTextarea").value,
+            "background": document.getElementById("projectBackgroundTextarea").value.replace(/\n/g, "<br/>"),
+            "introduction": document.getElementById("projectIntroductionTextarea").value.replace(/\n/g, "<br/>"),
             "terms": []
         },
         "requirements": [],
@@ -21,9 +21,9 @@ function requirement2JSON(){
 
     var table = document.getElementById("termTable")
     var rows = table.rows
-    for(var i=1;i < rows.length;i++){
+    for (var i = 1; i < rows.length; i++) {
         var cells = rows[i].cells
-        json.projectIntroduction.terms.push({"term":cells[0].innerHTML, "explanation":cells[1].innerHTML})
+        json.projectIntroduction.terms.push({ "term": cells[0].innerHTML, "explanation": cells[1].innerHTML })
     }
 
     var requirements = document.getElementById("requirementDiv").getElementsByTagName("div")
@@ -36,7 +36,7 @@ function requirement2JSON(){
             "children": [],
             "IOs": []
         }
-        for(var i=1;i < tables[1].rows.length;i++){
+        for (var i = 1; i < tables[1].rows.length; i++) {
             node.children.push({
                 "code": tables[1].rows[i].cells[0].innerHTML,
                 "name": tables[1].rows[i].cells[1].innerHTML,
@@ -44,11 +44,11 @@ function requirement2JSON(){
                 "output": tables[1].rows[i].cells[3].innerHTML
             })
         }
-        for(var i=1;i < tables[2].rows.length;i++){
+        for (var i = 1; i < tables[2].rows.length; i++) {
             node.IOs.push({
                 "code": tables[2].rows[i].cells[0].innerHTML,
                 "name": tables[2].rows[i].cells[1].innerHTML,
-                "method": tables[2].rows[i].cells[2].innerHTML,
+                "methon": tables[2].rows[i].cells[2].innerHTML,
                 "output": tables[2].rows[i].cells[3].innerHTML,
                 "next": tables[2].rows[i].cells[4].innerHTML
             })
@@ -58,13 +58,13 @@ function requirement2JSON(){
 
     table = document.getElementById("performanceTable")
     rows = table.rows
-    for(var i=1;i < rows.length;i++){
+    for (var i = 1; i < rows.length; i++) {
         var cells = rows[i].cells
         var node = {
-            "code": cells[1].innerHTML,
-            "description": cells[2].innerHTML
+            "code": cells[2].innerHTML,
+            "description": cells[1].innerHTML
         }
-        switch(cells[0].children[0].selectedIndex){
+        switch (cells[0].children[0].selectedIndex) {
             case 0:
                 json.performance.useablities.push(node)
                 break
@@ -82,9 +82,9 @@ function requirement2JSON(){
 
     table = document.getElementById("testTable")
     rows = table.rows
-    for(var i=1;i < rows.length;i++){
+    for (var i = 1; i < rows.length; i++) {
         var cells = rows[i].cells
-        json.testSpecification.push({"code":cells[0].innerHTML, "type":cells[1].innerHTML, "density":cells[2].innerHTML})
+        json.testSpecification.push({ "code": cells[0].innerHTML, "type": cells[1].innerHTML, "density": cells[2].innerHTML })
     }
     return json
 }

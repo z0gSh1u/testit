@@ -13,7 +13,7 @@ function JSON2HTML(json){
     markdown += json.projectIntroduction.introduction + "\n\n"
     markdown += "### 2.3 术语\n\n"
     markdown += "| 缩写词或术语 | 解释 |\n| ------------ | ---- |\n"
-    json.projectIntroduction.terms.array.forEach(e => {
+    json.projectIntroduction.terms.forEach(e => {
         markdown += "| " + e.term + " | " + e.explanation + " |\n"
     });
     markdown += "\n"
@@ -21,7 +21,7 @@ function JSON2HTML(json){
     markdown += "### 3.1 功能测试需求\n\n"
     for(var i=0;i < json.requirements.length;i++){
         var r = json.requirements[i]
-        markdown += "#### 3.1." + (i+1) + " " + r.name + "的需求分析\n\n"
+        markdown += "#### 3.1." + (i+1) + " " + r.name + "功能的需求分析\n\n"
         markdown += "- **功能需求编码：**" + r.code + "\n"
         markdown += "- **功能需求名称：**" + r.name + "\n"
         markdown += "- **功能描述：**" + r.description + "\n\n"
@@ -57,9 +57,4 @@ function JSON2HTML(json){
         markdown += "| " + e.code + " | " + e.type + " | " + e.density + " |\n"
     })
     return marked(markdown)
-}
-
-window.onload = function(){
-    //document.getElementById('reportDiv').innerHTML = JSON2HTML(JSON.parse(sessionStorage.getItem('requirementJSON')))
-    alert(sessionStorage.getItem('requirementJSON'))
 }

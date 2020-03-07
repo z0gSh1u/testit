@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试需求报告生成</title>
+  <link rel="stylesheet" href="../lib/bootstrap.min.css">
+  <script type="text/javascript" src="../js/1-requirement/1-requirement.js"></script>
+  <script type="text/javascript" src="../js/1-requirement/reader.js"></script>
+
+  <style>
+    .container {
+      width: 70%;
+      text-align: left;
+      margin: 0 auto;
+    }
+
+    input,
+    textarea,
+    table {
+      margin: 7px auto;
+      width: 100%;
+    }
+
+    .submitBtn {
+      width: 150px;
+      height: 70px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <center>
+    <h3>测试需求报告生成</h3>
+    <a href="../index.html">返回首页</a>
+  </center>
+  <div class="container">
+
+    <h4>软件名称：</h4>
+    <input id="projectNameText" type="text">
+    <br />
+    <h4>项目承担部门：</h4>
+    <input id="projectTeamText" type="text">
+    <br />
+    <h4>撰写人：</h4>
+    <input id="writerText" type="text">
+    <br />
+    <h4>完成日期：</h4>
+    <input id="completionDateText" type="text">
+    <br />
+    <h4>软件背景：</h4>
+    <textarea id="projectBackgroundTextarea" rows="7"></textarea>
+    <br />
+    <h4>软件介绍：</h4>
+    <textarea id="projectIntroductionTextarea" rows="7"></textarea>
+    <br />
+    <br />
+    <hr>
+    <h4>术语：</h4>
+    <table border="1" id="termTable">
+      <thead>
+        <tr>
+          <th style="width:30%;">
+            缩写词或术语
+          </th>
+          <th>
+            解释
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <button onclick="insertRow4Table('termTable')">十</button> <button onclick="deleteRow4Table('termTable')">一</button>
+    <br />
+    <br />
+    <hr>
+    <h4>功能测试需求：</h4>
+    <div id="requirementDiv">
+    </div>
+    <button onclick="createRequirements('requirementDiv')">新增</button>
+    <br><br>
+    <br />
+    <hr>
+    <h4>系统性能及可用性要求：</h4>
+    <table border="1" id="performanceTable">
+      <thead>
+        <tr>
+          <th style="width: 30%;">
+            性质
+          </th>
+          <th>
+            对系统的要求
+          </th>
+          <th>
+            编码
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <button onclick="insertRow4PerformanceTable('performanceTable')">十</button> <button
+      onclick="deleteRow4Table('performanceTable')">一</button>
+    <br />
+    <br />
+    <hr>
+    <h4>测试规格评估： </h4>
+    <table border="1" id="testTable">
+      <thead>
+        <tr>
+          <th>
+            序号
+          </th>
+          <th>
+            测试类型
+          </th>
+          <th>
+            测试用例密度
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <button onclick="insertRow4Table('testTable')">十</button> <button onclick="deleteRow4Table('testTable')">一</button>
+    <br />
+    <br />
+    <hr>
+
+    <button class="submitBtn" onclick="generateReport()">提交</button>
+  </div>
+
+  <div style="margin: 30px;"></div>
+</body>
+
+</html>
