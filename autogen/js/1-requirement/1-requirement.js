@@ -8,17 +8,10 @@ function insertRow4Table(tableId) {
     return tr
 }
 
-function insertRow4PerformanceTable(tableId) {
-    table = document.getElementById(tableId)
-    tr = table.insertRow(table.rows.length)
-    for (var i = 0; i < table.rows.item(0).cells.length; i++) {
-        td = tr.insertCell(i)
-        if (i > 0) {
-            td.contentEditable = true
-        } else {
-            td.innerHTML = "<select><option value='useablities'>可用性</option><option value='safety'>安全性</option><option value='performance'>性能</option><option value='runningEnvironment'>运行环境</option></select>"
-        }
-    }
+function insertRow4PerformanceTable(tableId){
+    tr = insertRow4Table(tableId)
+    tr.cells[0].contentEditable = false
+    tr.cells[0].innerHTML = "<select><option>可用性</option><option>安全性</option><option>性能</option><option>运行环境</option></select>"
     return tr
 }
 
@@ -36,7 +29,7 @@ function createRequirements(divId) {
     newDiv = document.createElement("div")
     newDiv.id = "requirement" + newDivCnt++
     document.getElementById(divId).appendChild(newDiv)
-    newDiv.innerHTML += "<b>功能需求" + newDivCnt + "：</b><button onclick=\"deleteRequirements('" + newDiv.id + "')\">删除</button>"
+    newDiv.innerHTML += "<b>功能需求分析：</b><button onclick=\"deleteRequirements('" + newDiv.id + "')\">删除</button>"
     tables = [document.createElement("table"), document.createElement("table"), document.createElement("table")]
 
     tables[0].border = 1
@@ -79,6 +72,10 @@ function save() {
     var softname = document.getElementById("projectNameText").value
     var filename = `${softname}_requirement.json`
     saveShareContent(toSave, filename)
+}
+function generateReport(){
+    sessionStorage.setItem("requirementJSON", JSON.stringify(requirement2JSON()))
+    window.location.href = "1-requirement_report.html"
 }
 
 function saveShareContent(content, fileName) {
