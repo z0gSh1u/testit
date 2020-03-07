@@ -1,4 +1,4 @@
-function JSON2HTML(json){
+function JSON2HTML(json) {
     var markdown = ""
     markdown += "# " + json.projectIntroduction.projectName + " 测试需求报告\n\n"
     markdown += "## 一、基本信息\n\n"
@@ -19,9 +19,9 @@ function JSON2HTML(json){
     markdown += "\n"
     markdown += "## 三、测试需求分析\n\n"
     markdown += "### 3.1 功能测试需求\n\n"
-    for(var i=0;i < json.requirements.length;i++){
+    for (var i = 0; i < json.requirements.length; i++) {
         var r = json.requirements[i]
-        markdown += "#### 3.1." + (i+1) + " " + r.name + "功能的需求分析\n\n"
+        markdown += "#### 3.1." + (i + 1) + " " + r.name + "功能的需求分析\n\n"
         markdown += "- **功能需求编码：**" + r.code + "\n"
         markdown += "- **功能需求名称：**" + r.name + "\n"
         markdown += "- **功能描述：**" + r.description + "\n\n"
