@@ -4,7 +4,6 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Xu Zhuo, Yuming Gao, Hantang Shen",
   "license": "UNLICENSED"
