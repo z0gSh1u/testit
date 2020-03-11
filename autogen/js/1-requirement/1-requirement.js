@@ -75,7 +75,7 @@ function save() {
 }
 function generateReport(){
     sessionStorage.setItem("requirementJSON", JSON.stringify(requirement2JSON()))
-    window.location.href = "1-requirement_report.html"
+    window.location.href = "../render/1-requirement.html"
 }
 
 function saveShareContent(content, fileName) {
