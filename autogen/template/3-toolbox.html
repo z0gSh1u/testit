@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用例工具箱</title>
+  <script src="../lib/axios.min.js"></script>
+  <script src="../lib/clipboard.min.js"></script>
+  <script src="../lib/vue.js"></script>
+  <style>
+    a:hover {
+      cursor: pointer;
+    }
+
+    a {
+      color: rgb(16, 77, 207);
+    }
+
+    .listing {
+      margin: 5px;
+      font-size: 14px;
+    }
+
+    .btn {
+      width: 60px;
+      height: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <textarea name="hid" id="hid" style="display: none;"></textarea>
+  <p id="hint" style="color: rgb(12,12,220); display: none; border: 2px solid gray; padding: 3px 8px; margin-top: 10px; margin-bottom: 0;">复制成功</p>
+  <div id="app">
+    <p style="font-size: large; font-weight: bold;">用例工具箱</p>
+    <p>当前选择：{{current}}</p>
+    <p v-for="(v, k) in preset" class="listing">
+      <a @click="choice(v, k)">{{k}}</a>
+    </p><br>
+  </div>
+  <button class="btn">确认</button>
+</body>
+
+<script>
+  let cbjs = new ClipboardJS('.btn', {
+    text: function () {
+      return document.getElementById('hid').innerHTML
+    }
+  })
+  cbjs.on('success', function (e) {
+    document.getElementById('hint').style.display = 'inline-block'
+    setTimeout(() => {
+      document.getElementById('hint').style.display = 'none'
+    }, 2500)
+  })
+  var vm = new Vue({
+    el: "#app",
+    data: {
+      preset: null,
+      current: "无"
+    },
+    created: function () {
+      let that = this
+      axios.get('../js/3-script/presetCase.json')
+        .then(function (res) {
+          that.preset = res.data['presetCase']
+        })
+    },
+    methods: {
+      choice: function (v, k) {
+        this.current = k
+        let randCase = v[Math.floor(Math.random() * v.length)]
+        // clipboard
+        document.getElementById('hid').innerHTML = randCase
+      }
+    }
+  })
+</script>
+
+</html>
