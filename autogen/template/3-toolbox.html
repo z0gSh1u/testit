@@ -52,7 +52,8 @@
     document.getElementById('hint').style.display = 'inline-block'
     setTimeout(() => {
       document.getElementById('hint').style.display = 'none'
-    }, 2500)
+      window.close()
+    }, 1500)
   })
   var vm = new Vue({
     el: "#app",

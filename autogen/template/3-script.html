@@ -56,63 +56,21 @@
     <h3>测试脚本生成</h3>
     <a href="../index.html">返回首页</a>
   </center>
-
   <div class="container">
     <span>项目名称：</span><input id="projectName" type="text" style="width: 350px;"><br><br>
     <span>前置代码：</span><br><textarea name="" id="prefixCode" cols="90" rows="4"></textarea><br><br>
+    <span>结果路径：</span><input id="resultPath" type="text" style="width: 350px;"><br><br>
     <span>请导入代码文件以自动分析...</span>&nbsp;&nbsp;<input type="file" id="codeInput"
-      style="display: inline-block;">&nbsp;&nbsp;<button onclick="analyzeCode()">开始分析</button>
+      style="display: inline-block;">&nbsp;&nbsp;<button onclick="analyzeCode()" class="btn btn-default">开始分析</button>
     <br><br>
-
-    <span>测试用例：</span><button>+</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-primary"
-      onclick="openToolbox()">用例工具箱</button>
-    <div class="cases">
-
-      <div class="case">
-        <span>用例名：</span>
-        <input type="text">
-        <p>用例详情：</p>
-        <table border="1" style="width: 100%;">
-          <thead>
-            <th style="width: 15%;">类型</th>
-            <th style="width: 20%;">被测函数</th>
-            <th style="width: 40%;">参数</th>
-            <th style="width: 25%;">期待结果</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <select>
-                  <option value="toBe">toBe</option>
-                  <option value="toBeArray">toBeArray</option>
-                  <option value="toHaveLength">toHaveLength</option>
-                  <option value="toContain">toContain</option>
-                  <option value="toNotContain">toNotContain</option>
-                </select>
-              </td>
-              <td>
-                <select></select>
-              </td>
-              <td>
-                <textarea rows="4" style="width: 80%; margin: 5px;"></textarea>
-              </td>
-              <td>
-                <textarea rows="4" style="width: 80%; margin: 5px;"></textarea>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-    </div>
-
+    <span>测试用例：</span><button class="btn btn-default" onclick="addCase()">+</button>&nbsp;&nbsp;&nbsp;<button
+      class="btn btn-primary" onclick="openToolbox()">用例工具箱</button>
+    <div class="cases" id='cases'></div>
     <hr>
-
-    <button style="height: 60px; width: 120px; font-size: large;">生成</button>
-
+    <div style="text-align: right;"><button style="height: 60px; width: 120px; font-size: large;"
+        class="btn btn-success">生成</button></div>
   </div>
-
-  <script src="../js/3-script/3-script.js"></script>
 </body>
+<script src="../js/3-script/3-script.js"></script>
 
 </html>
