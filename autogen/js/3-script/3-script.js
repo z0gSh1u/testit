@@ -104,30 +104,47 @@ function addCase() {
 }
 
 function generate() {
-  let content = `
+  let template_prefix = `
 // Mini-jest test script.
-// auto-gen`
-  content += document.getElementById('prefixCode').value + `
+// auto-gen
+`
+  template_prefix += document.getElementById('prefixCode').value + `
 `
   let projectName = document.getElementById('projectName').value
   let dumpPlace = document.getElementById('dumpPlace').value
   let template_head = `
-let _projectName = ${projectName}
+let _projectName = '${projectName}'
 let _result = [], _total = 0, _pass = 0
-let _dumpPlace = ${dumpPlace}
+let _dumpPlace = \`${dumpPlace}\`
 `
-  let template_item = `
-mj.test(${caseName},
-  [
-    mj.toBe(
-      _bt.newUser('ceshi', 'password', '13912345678', 'wrong.email@sina', '20')
-      , 5
-    )
-  ],
-  _result
-)
-total += 1
+
+  let template_body = ''
+  for (let i = 1; i <= caseId; i++) {
+    let caseName = document.getElementById(`casename_${i}`).value
+    let caseType = document.getElementById(`type_${i}`).value
+    let caseFunc = document.getElementById(`testfunc_${i}`).value
+    let caseParam = eval(document.getElementById(`param_${i}`).value)
+    let caseExpect = document.getElementById(`expect_${i}`).value
+    let formatParam = ''
+    console.log(caseParam)
+    caseParam.forEach(v => {
+      formatParam += (typeof v == 'string' ? `'${v}'` : v)
+      formatParam += ','
+    })
+    formatParam = formatParam.substring(0, formatParam.length - 1)
+    let template = `
+mj.test("${caseName}",
+[
+  mj.${caseType}(
+    _bt.${caseFunc}(${formatParam}), ${caseExpect}
+  )
+], _result, () => { _pass += 1 }
+)    
+_total += 1
 `
+    template_body += template
+  }
+
   let template_tail = `
 let _toDump = {
   "mjInfo": "mini-jest 0.1",
@@ -137,4 +154,19 @@ let _toDump = {
 }
 mj.dump(_toDump, _dumpPlace, _projectName)
 `
+  let summary = template_prefix + template_head + template_body + template_tail
+  saveShareContent(summary, `${projectName}.test.js`)
+  alert('测试脚本保存成功，请到本地执行。')
+}
+function saveShareContent(content, fileName) {
+  let downLink = document.createElement('a')
+  downLink.download = fileName
+  // 字符内容转换为blob地址
+  let blob = new Blob([content])
+  downLink.href = URL.createObjectURL(blob)
+  // 链接插入到页面
+  document.body.appendChild(downLink)
+  downLink.click()
+  // 移除下载链接
+  document.body.removeChild(downLink)
 }

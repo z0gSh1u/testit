@@ -1,0 +1,19 @@
+{
+  "mjInfo": "mini-jest 0.1",
+  "projectName": "weiweibo",
+  "passRate": 0.5,
+  "result": [
+    {
+      "description": "wrong email",
+      "body": [
+        "PASS"
+      ]
+    },
+    {
+      "description": "wrong phone",
+      "body": [
+        "FAIL"
+      ]
+    }
+  ]
+}

@@ -9,13 +9,16 @@ function dump(result, to, projectname) {
 }
 module.exports.dump = dump
 
-function test(description, body, result) {
+function test(description, body, result, passCb) {
   let partResult = { description }
   partResult['body'] = []
+  let hasFail = false
   body.forEach((step, i) => {
     partResult['body'][i] = step ? 'PASS' : 'FAIL'
+    if (!step) hasFail = true
   })
   result.push(partResult)
+  !hasFail && passCb && passCb()
 }
 module.exports.test = test
 

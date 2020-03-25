@@ -53,13 +53,13 @@
 
 <body>
   <center>
-    <h3>测试脚本生成</h3>
+    <h3>测试脚本自动生成</h3>
     <a href="../index.html">返回首页</a>
   </center>
   <div class="container">
     <span>项目名称：</span><input id="projectName" type="text" style="width: 350px;"><br><br>
     <span>前置代码：</span><br><textarea name="" id="prefixCode" cols="90" rows="4"></textarea><br><br>
-    <span>结果路径：</span><input id="resultPath" type="text" style="width: 350px;"><br><br>
+    <span>结果路径：</span><input id="dumpPlace" type="text" style="width: 350px;"><br><br>
     <span>请导入代码文件以自动分析...</span>&nbsp;&nbsp;<input type="file" id="codeInput"
       style="display: inline-block;">&nbsp;&nbsp;<button onclick="analyzeCode()" class="btn btn-default">开始分析</button>
     <br><br>
@@ -67,8 +67,11 @@
       class="btn btn-primary" onclick="openToolbox()">用例工具箱</button>
     <div class="cases" id='cases'></div>
     <hr>
-    <div style="text-align: right;"><button style="height: 60px; width: 120px; font-size: large;"
-        class="btn btn-success">生成</button></div>
+    <div style="text-align: right;">
+      <button class="btn btn-primary" style="height: 60px; width: 120px; font-size: large;"
+        onclick="openToolbox()">用例工具箱</button>&nbsp;&nbsp;
+      <button style="height: 60px; width: 120px; font-size: large;" class="btn btn-success"
+        onclick="generate()">生成</button></div>
   </div>
 </body>
 <script src="../js/3-script/3-script.js"></script>
