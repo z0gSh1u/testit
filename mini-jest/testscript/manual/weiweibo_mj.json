@@ -1,0 +1,88 @@
+{
+  "mjInfo": "mini-jest 0.1 manual",
+  "projectName": "weiweibo",
+  "passRate": 0.9166666666666666,
+  "result": [
+    {
+      "description": "C1.1-用户注册-用户重复",
+      "body": [
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "description": "C1.2-用户注册-用户名不合规",
+      "body": [
+        "FAIL",
+        "PASS"
+      ]
+    },
+    {
+      "description": "C1.3-用户注册-密码不合规",
+      "body": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "description": "C1.4-用户注册-手机号不合规",
+      "body": [
+        "PASS",
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "description": "C1.5-用户注册-电子邮箱不合规",
+      "body": [
+        "PASS"
+      ]
+    },
+    {
+      "description": "C1.6-用户注册-年龄不合规",
+      "body": [
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "description": "C1.7-用户注册-正常注册",
+      "body": [
+        "PASS"
+      ]
+    },
+    {
+      "description": "C2.1-发送新微博-用户不存在",
+      "body": [
+        "PASS"
+      ]
+    },
+    {
+      "description": "C2.2-发送新微博-微博长度不正确",
+      "body": [
+        "PASS",
+        "PASS"
+      ]
+    },
+    {
+      "description": "C2.3-发送新微博-正常发送",
+      "body": [
+        "PASS"
+      ]
+    },
+    {
+      "description": "C3.1-获取微博-用户不存在",
+      "body": [
+        "PASS"
+      ]
+    },
+    {
+      "description": "C3.1-获取微博-用户存在",
+      "body": [
+        "PASS",
+        "PASS"
+      ]
+    }
+  ]
+}

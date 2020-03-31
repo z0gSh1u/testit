@@ -42,7 +42,7 @@ function toBeArray(src, expect) {
 module.exports.toBeArray = toBeArray
 
 function toHaveLength(src, len) {
-  return src.length && src.length === len
+  return src.length && src.length == len
 }
 module.exports.toHaveLength = toHaveLength
 
