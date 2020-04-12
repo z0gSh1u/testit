@@ -8,13 +8,16 @@
     <link rel="stylesheet" href="../lib/bootstrap.min.css">
     <script type="text/javascript" src="../lib/marked.min.js"></script>
     <script type="text/javascript" src="../js/2-plan/writer.js"></script>
+    <script src="../lib/jspdf.debug.js"></script>
+    <script src="../lib/html2canvas.js"></script>
+    <script src="../js/div2pdf.js"></script>
     <script>
         window.onload = function () {
             var reportDiv = document.getElementById('reportDiv')
             reportDiv.innerHTML = JSON2HTML(JSON.parse(sessionStorage.getItem('planJSON')))
             Array.from(reportDiv.getElementsByTagName("table")).forEach(e => {
                 e.border = 1
-                if(e.rows[0].cells[0].innerHTML == "") {
+                if (e.rows[0].cells[0].innerHTML == "") {
                     var rows = e.rows
                     var flag = null
                     Array.from(rows).forEach(r => {
@@ -39,7 +42,7 @@
             font-weight: bold;
         }
 
-        #reportDiv{
+        #reportDiv {
             width: 70%;
             text-align: left;
             margin: 0 auto;
@@ -49,7 +52,8 @@
             width: 100%;
         }
 
-        td,th {
+        td,
+        th {
             padding-top: 3px;
             padding-bottom: 3px;
         }
@@ -57,8 +61,11 @@
 </head>
 
 <body>
-    <div id="reportDiv">
-
+    <div id="reportDiv"></div>
+    <div style="margin: 40px auto;"></div>
+    <div style="text-align: right;">
+        <button onclick="div2pdf('reportDiv', '测试计划书')" class="btn btn-primary"
+            style="width: 120px; height: 50px; margin-right: 150px;">保存报告</button>
     </div>
     <div style="margin: 80px auto;"></div>
 </body>

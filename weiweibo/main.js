@@ -35,10 +35,10 @@ function newUser(username, password, mobile, email, age) {
   if (userTable[username]) return 1
   // register
   userTable[username] = { password, mobile, email, age }
-  fs.writeFileSync(USERTABLE_PATH, JSON.stringify(userTable))
+  fs.writeFileSync(USERTABLE_PATH, JSON.stringify(userTable, null, 2))
   let tweetTable = JSON.parse(fs.readFileSync(TWEETTABLE_PATH))
   tweetTable[username] = []
-  fs.writeFileSync(TWEETTABLE_PATH, JSON.stringify(tweetTable))
+  fs.writeFileSync(TWEETTABLE_PATH, JSON.stringify(tweetTable, null, 2))
   return 0
 }
 module.exports.newUser = newUser
@@ -58,7 +58,7 @@ function newTweet(username, content) {
   // send
   let tweetTable = JSON.parse(fs.readFileSync(TWEETTABLE_PATH))
   tweetTable[username].push(content)
-  fs.writeFileSync(TWEETTABLE_PATH, JSON.stringify(tweetTable))
+  fs.writeFileSync(TWEETTABLE_PATH, JSON.stringify(tweetTable, null, 2))
   return 0
 }
 module.exports.newTweet = newTweet

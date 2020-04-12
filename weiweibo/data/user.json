@@ -1,8 +1,20 @@
 {
-  "zhuoxu": {
-    "password": "zhuoxu123",
-    "mobile": "18059936886",
-    "email": "zx.cs@qq.com.cn",
-    "age": 10
+  "test": {
+    "password": "zhuoxu",
+    "mobile": "13912345678",
+    "email": "a@b.com",
+    "age": "20"
+  },
+  "123%abc": {
+    "password": "zhuoxu",
+    "mobile": "13912345678",
+    "email": "a@b.com",
+    "age": "20"
+  },
+  "test2": {
+    "password": "southeast",
+    "mobile": "13898765432",
+    "email": "hello@xxx.edu.hk",
+    "age": "30"
   }
 }
