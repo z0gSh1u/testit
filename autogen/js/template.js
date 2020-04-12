@@ -1,4 +1,5 @@
 var divCnt = 0
+
 function createDiv() {
     var newDiv = document.createElement("div")
     newDiv.id = "div" + divCnt++
@@ -6,6 +7,7 @@ function createDiv() {
 }
 
 var tableCnt = 0
+
 function createTable(border = 1) {
     var newTable = document.createElement("table")
     newTable.id = "table" + tableCnt++
@@ -53,10 +55,10 @@ function table2JSON(tableId, thArr) {
     var ret = []
     var table = document.getElementById(tableId)
     var trs = table.rows
-    for(var i=1;i < trs.length;i++) {
+    for (var i = 1; i < trs.length; i++) {
         var rowContent = {}
         var cells = trs[i].cells
-        for(var j=0;j < cells.length;j++) {
+        for (var j = 0; j < cells.length; j++) {
             rowContent[thArr[j]] = cells[j].innerHTML
         }
         ret.push(rowContent)
@@ -64,21 +66,21 @@ function table2JSON(tableId, thArr) {
     return ret
 }
 
-function tableWithSelect2JSON(tableId, thArr, options, selectCol=0) {
+function tableWithSelect2JSON(tableId, thArr, options, selectCol = 0) {
     var ret = {}
     options.forEach(option => {
         ret[option] = []
     })
     var table = document.getElementById(tableId)
     var trs = table.rows
-    for(var i=1;i < trs.length;i++) {
+    for (var i = 1; i < trs.length; i++) {
         var rowContent = {}
         var cells = trs[i].cells
-        for(var j=0;j < cells.length;j++) {
-            if(j == selectCol) {
+        for (var j = 0; j < cells.length; j++) {
+            if (j == selectCol) {
                 continue
             }
-            rowContent[thArr[j-(j>selectCol)]] = cells[j].innerHTML
+            rowContent[thArr[j - (j > selectCol)]] = cells[j].innerHTML
         }
         ret[options[cells[0].children[selectCol].selectedIndex]].push(rowContent)
     }
@@ -92,4 +94,17 @@ function list2JSON(listDivId) {
         ret.push(input.value)
     })
     return ret
+}
+
+function dateFormat(date) {
+    if (date == "") {
+        return ""
+    }
+    var num = date.split("-")
+    var res = ""
+    var units = ["年", "月", "日"]
+    for (var i = 0; i < num.length; i++) {
+        res += (num[i][0] == "0" ? num[i][1] : num[i]) + units[i]
+    }
+    return res
 }
