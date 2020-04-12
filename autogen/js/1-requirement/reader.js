@@ -4,7 +4,7 @@ function HTML2JSON() {
             "projectName": document.getElementById("projectNameText").value,
             "projectTeam": document.getElementById("projectTeamText").value,
             "writer": document.getElementById("writerText").value,
-            "completionDate": document.getElementById("completionDateText").value,
+            "completionDate": dateFormat(document.getElementById("completionDateText").value),
             "background": document.getElementById("projectBackgroundTextarea").value.replace(/\n/g, "<br/>"),
             "introduction": document.getElementById("projectIntroductionTextarea").value.replace(/\n/g, "<br/>"),
             "terms": table2JSON("termTable", ["term", "explanation"])

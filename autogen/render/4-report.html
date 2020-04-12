@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试总结报告</title>
+    <link rel="stylesheet" href="../lib/bootstrap.min.css">
+    <script type="text/javascript" src="../lib/marked.min.js"></script>
+    <script type="text/javascript" src="../js/4-report/writer.js"></script>
+    <script type="text/javascript" src="../lib/echarts.min.js"></script>
+    <script src="../lib/jspdf.debug.js"></script>
+    <script src="../lib/html2canvas.js"></script>
+    <script src="../js/div2pdf.js"></script>
+    <script>
+        window.onload = function () {
+            var reportDiv = document.getElementById('reportDiv')
+            var reportJSON = JSON.parse(sessionStorage.getItem('reportJSON'))
+            reportDiv.innerHTML = JSON2HTML(reportJSON)
+            var functionAmt = 0,
+                caseAmt = 0,
+                bugAmt = 0,
+                BPM = new Map()
+            reportJSON.testResultJSON.result.forEach(func => {
+                functionAmt++
+                var moduleName = func.description.split(".")[0]
+                if (!BPM.has(moduleName)) {
+                    BPM.set(moduleName, 0)
+                }
+                func.body.forEach(caseRes => {
+                    caseAmt++
+                    if (caseRes == "FAIL") {
+                        BPM.set(moduleName, BPM.get(moduleName) + 1)
+                        bugAmt++
+                    }
+                })
+            });
+
+            document.getElementById("testSummaryDiv").innerHTML = "&emsp;&emsp;" + reportJSON.testResultJSON.projectName +
+                "软件测试从" + reportJSON
+                .testSummary.beginMonth + "开始，到" + reportJSON.testSummary.endMonth + "结束。共有测试功能点" + functionAmt +
+                "个，执行" + caseAmt + "个测试用例，平均每个功能点执行测试用例" + (caseAmt / functionAmt).toFixed(2) + "个。测试共发现" + bugAmt +
+                "个Bug，平均每个测试功能点" + (bugAmt / functionAmt).toFixed(2) + "个Bug。测试用例整体通过率为" + (reportJSON
+                    .testResultJSON.passRate *
+                    100).toFixed(2) + "%。\n\n"
+
+            echarts.init(document.getElementById("bugsModuleChartDiv")).setOption({
+                title: {
+                    text: "按模块统计的结果"
+                },
+                tooltip: {},
+                legend: {
+                    data: ["按模块统计的结果"]
+                },
+                xAxis: {
+                    data: Array.from(BPM.keys())
+                },
+                yAxis: {},
+                series: [{
+                    name: "按模块统计的结果",
+                    type: "bar",
+                    color: "blue",
+                    data: Array.from(BPM.values())
+                }]
+            })
+            echarts.init(document.getElementById("bugsRateChartDiv")).setOption({
+                title: {
+                    text: "按测试用例总数统计的结果"
+                },
+                tooltip: {},
+                series: [{
+                    name: "按测试用例总数统计的结果",
+                    type: "pie",
+                    radius: "55%",
+                    data: [{
+                            value: bugAmt,
+                            name: "缺陷"
+                        },
+                        {
+                            value: caseAmt - bugAmt,
+                            name: "成功"
+                        }
+                    ]
+                }]
+            })
+        }
+    </script>
+    <style>
+        h1 {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #reportDiv {
+            width: 70%;
+            text-align: left;
+            margin: 0 auto;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td,
+        th {
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="reportDiv"></div>
+    <div style="margin: 40px auto;"></div>
+    <div style="text-align: right;">
+        <button onclick="div2pdf('reportDiv', '测试总结报告')" class="btn btn-primary"
+            style="width: 120px; height: 50px; margin-right: 150px;">保存报告</button>
+    </div>
+    <div style="margin: 80px auto;"></div>
+</body>
+
+</html>

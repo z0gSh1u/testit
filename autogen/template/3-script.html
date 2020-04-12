@@ -1,118 +1,93 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>测试脚本生成</title>
-    <link rel="stylesheet" href="../lib/bootstrap.min.css" />
-    <script src="../lib/vue.js"></script>
-    <script src="../lib/jspdf.debug.js"></script>
-    <script src="../lib/html2canvas.js"></script>
-    <script src="../js/div2pdf.js"></script>
-    <style>
-      .container {
-        width: 70%;
-        text-align: left;
-        margin: 0 auto;
-      }
 
-      .toolbox {
-        width: 20%;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>测试脚本生成</title>
+  <link rel="stylesheet" href="../lib/bootstrap.min.css" />
+  <script src="../lib/vue.js"></script>
+  <script src="../lib/jspdf.debug.js"></script>
+  <script src="../lib/html2canvas.js"></script>
+  <script src="../js/div2pdf.js"></script>
+  <style>
+    .container {
+      width: 70%;
+      text-align: left;
+      margin: 0 auto;
+    }
 
-      span {
-        font-weight: bold;
-      }
+    .toolbox {
+      width: 20%;
+    }
 
-      .case > span {
-        font-weight: normal;
-      }
+    span {
+      font-weight: bold;
+    }
 
-      .case {
-        border: 2px solid gray;
-        padding: 10px;
-        margin: 10px;
-      }
+    .case>span {
+      font-weight: normal;
+    }
 
-      select {
-        margin-left: 8px;
-        font-size: 16px;
-      }
+    .case {
+      border: 2px solid gray;
+      padding: 10px;
+      margin: 10px;
+    }
 
-      option {
-        font-size: 16px;
-      }
+    select {
+      margin-left: 8px;
+      font-size: 16px;
+    }
 
-      textarea {
-        font-family: 'Consolas';
-      }
+    option {
+      font-size: 16px;
+    }
 
-      th {
-        padding-left: 3px;
-      }
-    </style>
-  </head>
+    textarea {
+      font-family: 'Consolas';
+    }
 
-  <body>
-    <center>
-      <h3>测试脚本自动生成</h3>
-      <a href="../index.html">返回首页</a>
-    </center>
-    <div class="container" id="container">
-      <span>项目名称：</span
-      ><input id="projectName" type="text" style="width: 350px;" /><br /><br />
-      <span>前置代码：</span><br /><textarea
-        name=""
-        id="prefixCode"
-        cols="90"
-        rows="4"
-      ></textarea
-      ><br /><br />
-      <span>结果路径：</span
-      ><input id="dumpPlace" type="text" style="width: 350px;" /><br /><br />
-      <span>请导入代码文件以自动分析...</span>&nbsp;&nbsp;<input
-        type="file"
-        id="codeInput"
-        style="display: inline-block;"
-      />&nbsp;&nbsp;<button onclick="analyzeCode()" class="btn btn-default">
-        开始分析
+    th {
+      padding-left: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <center>
+    <h3>测试脚本自动生成</h3>
+    <a href="../index.html">返回首页</a>
+  </center>
+  <div class="container" id="container">
+    <span>项目名称：</span><input id="projectName" type="text" style="width: 350px;" /><br /><br />
+    <span>前置代码：</span><br /><textarea name="" id="prefixCode" cols="90" rows="4"></textarea><br /><br />
+    <span>结果路径：</span><input id="dumpPlace" type="text" style="width: 350px;" /><br /><br />
+    <span>请导入代码文件以自动分析...</span>&nbsp;&nbsp;<input type="file" id="codeInput"
+      style="display: inline-block;" />&nbsp;&nbsp;<button onclick="analyzeCode()" class="btn btn-default">
+      开始分析
+    </button>
+    <br /><br />
+    <span>测试用例：</span><button class="btn btn-default" onclick="addCase()">+</button>&nbsp;&nbsp;&nbsp;<button
+      class="btn btn-primary" onclick="openToolbox()">
+      用例工具箱
+    </button>
+    <div class="cases" id="cases"></div>
+    <hr />
+    <div style="text-align: right;">
+      <button class="btn btn-primary" style="height: 60px; width: 120px; font-size: large;" onclick="openToolbox()">
+        用例工具箱</button>&nbsp;&nbsp;
+      <button class="btn btn-info" style="height: 60px; width: 140px; font-size: large;"
+        onclick="div2pdf('container', '测试脚本文档')">
+        保存脚本文档
       </button>
-      <br /><br />
-      <span>测试用例：</span
-      ><button class="btn btn-default" onclick="addCase()">+</button
-      >&nbsp;&nbsp;&nbsp;<button
-        class="btn btn-primary"
-        onclick="openToolbox()"
-      >
-        用例工具箱
+      <button style="height: 60px; width: 120px; font-size: large;" class="btn btn-success" onclick="generate()">
+        生成
       </button>
-      <div class="cases" id="cases"></div>
-      <hr />
-      <div style="text-align: right;">
-        <button
-          class="btn btn-primary"
-          style="height: 60px; width: 120px; font-size: large;"
-          onclick="openToolbox()"
-        >
-          用例工具箱</button
-        >&nbsp;&nbsp;
-        <button
-          class="btn btn-info"
-          style="height: 60px; width: 140px; font-size: large;"
-          onclick="div2pdf('container', '测试脚本文档')"
-        >
-          保存脚本文档
-        </button>
-        <button
-          style="height: 60px; width: 120px; font-size: large;"
-          class="btn btn-success"
-          onclick="generate()"
-        >
-          生成
-        </button>
-      </div>
     </div>
-    <div style="margin-bottom: 30px;"></div>
-  </body>
-  <script src="../js/3-script/3-script.js"></script>
+  </div>
+  <div style="margin-bottom: 30px;"></div>
+</body>
+<script src="../js/3-script/3-script.js"></script>
+
 </html>
