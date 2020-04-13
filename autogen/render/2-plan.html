@@ -2,72 +2,84 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>测试需求报告</title>
-    <link rel="stylesheet" href="../lib/bootstrap.min.css">
-    <script type="text/javascript" src="../lib/marked.min.js"></script>
-    <script type="text/javascript" src="../js/2-plan/writer.js"></script>
-    <script src="../lib/jspdf.debug.js"></script>
-    <script src="../lib/html2canvas.js"></script>
-    <script src="../js/div2pdf.js"></script>
-    <script>
-        window.onload = function () {
-            var reportDiv = document.getElementById('reportDiv')
-            reportDiv.innerHTML = JSON2HTML(JSON.parse(sessionStorage.getItem('planJSON')))
-            Array.from(reportDiv.getElementsByTagName("table")).forEach(e => {
-                e.border = 1
-                if (e.rows[0].cells[0].innerHTML == "") {
-                    var rows = e.rows
-                    var flag = null
-                    Array.from(rows).forEach(r => {
-                        if (flag == null) {
-                            flag = r.cells[0]
-                            flag.rowspan = 1
-                        } else if (r.cells[0].innerHTML == flag.innerHTML) {
-                            r.removeChild(r.cells[0])
-                            flag.rowSpan = flag.rowSpan + 1
-                        } else {
-                            flag = r.cells[0]
-                            flag.rowspan = 1
-                        }
-                    })
-                }
-            });
-        }
-    </script>
-    <style>
-        h1 {
-            text-align: center;
-            font-weight: bold;
-        }
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>测试计划报告</title>
+	<link rel="stylesheet" href="../lib/bootstrap.min.css">
+	<script type="text/javascript" src="../lib/marked.min.js"></script>
+	<script type="text/javascript" src="../js/2-plan.js"></script>
+	<script src="../lib/jspdf.debug.js"></script>
+	<script src="../lib/html2canvas.js"></script>
+	<script src="../js/div2pdf.js"></script>
+	<script>
+		window.onload = function () {
+			var reportDiv = document.getElementById('reportDiv')
+			reportDiv.innerHTML = JSON2HTML(JSON.parse(sessionStorage.getItem('planJSON')))
+			Array.from(reportDiv.getElementsByTagName("table")).forEach(e => {
+				e.border = 1
+				if (e.rows[0].cells[0].innerHTML == "") {
+					var rows = e.rows
+					var flag = null
+					Array.from(rows).forEach(r => {
+						if (flag == null) {
+							flag = r.cells[0]
+							flag.rowspan = 1
+						} else if (r.cells[0].innerHTML == flag.innerHTML) {
+							r.removeChild(r.cells[0])
+							flag.rowSpan = flag.rowSpan + 1
+						} else {
+							flag = r.cells[0]
+							flag.rowspan = 1
+						}
+					})
+				}
+			});
+			document.querySelectorAll('table').forEach(dom => {
+				dom.className = 'table'
+			})
+		}
+	</script>
+	<style>
+		h1 {
+			text-align: center;
+			font-weight: bold;
+		}
 
-        #reportDiv {
-            width: 70%;
-            text-align: left;
-            margin: 0 auto;
-        }
+		#reportDiv {
+			width: 70%;
+			text-align: left;
+			margin: 0 auto;
+		}
 
-        table {
-            width: 100%;
-        }
+		table {
+			width: 100%;
+		}
 
-        td,
-        th {
-            padding-top: 3px;
-            padding-bottom: 3px;
-        }
-    </style>
+		td,
+		th {
+			padding-top: 3px;
+			padding-bottom: 3px;
+		}
+
+		.submitBtn {
+			width: 150px;
+			height: 70px;
+			font-size: 18px;
+		}
+
+		h2 {
+			font-weight: bold;
+		}
+	</style>
 </head>
 
 <body>
-    <div id="reportDiv"></div>
-    <div style="margin: 40px auto;"></div>
-    <div style="text-align: right;">
-        <button onclick="div2pdf('reportDiv', '测试计划书')" class="btn btn-primary"
-            style="width: 120px; height: 50px; margin-right: 150px;">保存报告</button>
-    </div>
-    <div style="margin: 80px auto;"></div>
+	<div id="reportDiv"></div>
+	<div style="margin: 40px auto;"></div>
+	<div style="text-align: right; margin: 0 auto; width: 80%;">
+		<button onclick="div2pdf('reportDiv', '测试计划书')" class="submitBtn btn btn-primary">保存报告</button>
+	</div>
+	<div style="margin: 80px auto;"></div>
 </body>
 
 </html>

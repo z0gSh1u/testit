@@ -65,7 +65,7 @@
     },
     created: function () {
       let that = this
-      axios.get('../js/3-script/presetCase.json')
+      axios.get('../js/presetCase.json')
         .then(function (res) {
           that.preset = res.data['presetCase']
         })

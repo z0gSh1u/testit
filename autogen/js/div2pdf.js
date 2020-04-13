@@ -1,7 +1,13 @@
+/**
+ * 将div保存为pdf
+ */
 function div2pdf(rootDivId, savename) {
+  window.scrollTo(0, 0)
   let target = document.getElementById(rootDivId)
   target.style.background = "#FFFFFF"
-  html2canvas(target, {
+  html2canvas(
+    target, {
+    dpi: 172,
     onrendered: function (canvas) {
       var contentWidth = canvas.width;
       var contentHeight = canvas.height;
@@ -25,6 +31,7 @@ function div2pdf(rootDivId, savename) {
         }
       }
       pdf.save(`${savename}.pdf`);
-    }
+    },
+    background: "#fff"
   })
 }

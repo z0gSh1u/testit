@@ -4,11 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>测试需求报告生成</title>
+  <title>测试需求报告生成 - testit</title>
   <link rel="stylesheet" href="../lib/bootstrap.min.css">
   <script type="text/javascript" src="../js/template.js"></script>
-  <script type="text/javascript" src="../js/1-requirement/1-requirement.js"></script>
-  <script type="text/javascript" src="../js/1-requirement/reader.js"></script>
+  <script type="text/javascript" src="../js/1-requirement.js"></script>
 
   <style>
     .container {
@@ -34,36 +33,31 @@
 
 <body>
   <center>
-    <h3>测试需求报告生成</h3>
+    <h2>测试需求报告生成</h2>
     <a href="../index.html">返回首页</a>
   </center>
   <div class="container">
 
     <h4>产品名称：</h4>
-    <input id="projectNameText" type="text">
-    <br />
+    <input id="projectNameText" type="text" class="form-control">
     <h4>项目承担部门：</h4>
-    <input id="projectTeamText" type="text">
-    <br />
+    <input id="projectTeamText" type="text" class="form-control">
     <h4>撰写人：</h4>
-    <input id="writerText" type="text">
-    <br />
+    <input id="writerText" type="text" class="form-control">
     <h4>完成日期：</h4>
-    <input id="completionDateText" type="date">
-    <br />
+    <input id="completionDateText" type="date" class="form-control">
     <h4>软件背景：</h4>
-    <textarea id="projectBackgroundTextarea" rows="7"></textarea>
-    <br />
+    <textarea id="projectBackgroundTextarea" rows="7" class="form-control"></textarea>
     <h4>软件介绍：</h4>
-    <textarea id="projectIntroductionTextarea" rows="7"></textarea>
-    <br />
-    <br />
+    <textarea id="projectIntroductionTextarea" rows="7" class="form-control"></textarea>
+
     <hr>
+
     <h4>术语：</h4>
-    <table border="1" id="termTable">
+    <table border="1" id="termTable" class="table">
       <thead>
         <tr>
-          <th style="width:30%;">
+          <th style="width: 30%;">
             缩写词或术语
           </th>
           <th>
@@ -74,67 +68,63 @@
       <tbody>
       </tbody>
     </table>
-    <button onclick="insertRow4Table('termTable')">十</button> <button onclick="deleteRow4Table('termTable')">一</button>
+    <button onclick="insertRow4Table('termTable')" class="btn btn-success">新增</button>
+    <button onclick="deleteRow4Table('termTable')" class="btn btn-danger">减少</button>
     <br />
-    <br />
+
     <hr>
+
     <h4>功能测试需求：</h4>
-    <div id="requirementDiv">
-    </div>
-    <button onclick="createRequirements('requirementDiv')">新增</button>
+    <div id="requirementDiv"></div>
+    <button onclick="createRequirements('requirementDiv')" class="btn btn-success">新增</button>
     <br><br>
     <br />
+
     <hr>
+
     <h4>系统性能及可用性要求：</h4>
-    <table border="1" id="performanceTable">
+    <table border="1" id="performanceTable" class="table">
       <thead>
         <tr>
-          <th style="width: 30%;">
-            性质
-          </th>
-          <th>
-            对系统的要求
-          </th>
-          <th>
-            编码
-          </th>
+          <th style="width: 15%;">性质</th>
+          <th>对系统的要求</th>
+          <th>编码</th>
         </tr>
       </thead>
       <tbody>
       </tbody>
     </table>
-    <button onclick="insertRow4PerformanceTable('performanceTable')">十</button> <button
-      onclick="deleteRow4Table('performanceTable')">一</button>
+    <button onclick="insertRow4PerformanceTable('performanceTable')" class="btn btn-success">新增</button>
+    <button onclick="deleteRow4Table('performanceTable')" class="btn btn-danger">减少</button>
     <br />
-    <br />
+
     <hr>
+
     <h4>测试规格评估： </h4>
-    <table border="1" id="testTable">
+    <table border="1" id="testTable" class="table">
       <thead>
         <tr>
-          <th>
-            序号
-          </th>
-          <th>
-            测试类型
-          </th>
-          <th>
-            测试用例密度
-          </th>
+          <th>序号 </th>
+          <th>测试类型</th>
+          <th>测试用例密度</th>
         </tr>
       </thead>
       <tbody>
       </tbody>
     </table>
-    <button onclick="insertRow4Table('testTable')">十</button> <button onclick="deleteRow4Table('testTable')">一</button>
-    <br />
+    <button onclick="insertRow4Table('testTable')" class="btn btn-success">新增</button>
+    <button onclick="deleteRow4Table('testTable')" class="btn btn-danger">减少</button>
     <br />
     <hr>
 
-    <div style="text-align: right;"><button class="submitBtn" onclick="generateReport()">提交</button></div>
+    <div style="text-align: right;">
+      <button class="submitBtn btn btn-primary" onclick="generateReport()">开始生成</button>
+    </div>
+
   </div>
 
   <div style="margin: 30px;"></div>
+
 </body>
 
 </html>

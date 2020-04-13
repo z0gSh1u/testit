@@ -1,0 +1,11 @@
+{
+  "cases": {
+    "C1.1-用户注册-用户重复": [
+      {
+        "type": "toBe",
+        "func": "newUser('test', 'zhuoxu', '13912345678', 'a@b.com', '20')",
+        "expect": "0"
+      }
+    ]
+  }
+}

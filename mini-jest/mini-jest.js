@@ -1,11 +1,11 @@
-// Mini-jest test framework.
+// Mini-jest testing framework.
 // by z0gSh1u @ 2020-03-05
 
 const fs = require('fs')
 const path = require('path')
 
 function dump(result, to, projectname) {
-  fs.writeFileSync(path.join(to, `${projectname}_mj.json`), JSON.stringify(result, null, 2))
+  fs.writeFileSync(path.join(to, `${projectname}_MJResult.json`), JSON.stringify(result, null, 2))
 }
 module.exports.dump = dump
 
