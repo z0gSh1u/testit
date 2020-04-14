@@ -110,7 +110,7 @@ mj.test(
   'C2.1-发送新微博-用户不存在',
   [
     mj.toBe(
-      _bt.newTweet("xxx", "abcdefg"), 2
+      _bt.newTweet('xxx', 'abcdefg'), 2
     )
   ],
   _result, _passCb
@@ -120,11 +120,11 @@ mj.test(
   'C2.2-发送新微博-微博长度不正确',
   [
     mj.toBe(
-      _bt.newTweet("test2", ""), 1
+      _bt.newTweet('test2', ''), 1
     ),
     mj.toBe(
-      _bt.newTweet("test2",
-        "一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十补")
+      _bt.newTweet('test2',
+        '一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十补')
       , 1
     )
   ],
@@ -135,7 +135,7 @@ mj.test(
   'C2.3-发送新微博-正常发送',
   [
     mj.toBe(
-      _bt.newTweet("test2", "一二三四五六七八九十一二三四五六七八九十"), 0
+      _bt.newTweet('test2', '一二三四五六七八九十一二三四五六七八九十'), 0
     )
   ],
   _result, _passCb
@@ -146,16 +146,16 @@ _total += 1
 mj.test(
   'C3.1-获取微博-用户不存在',
   [
-    mj.toBeArray(_bt.fetchTweetByUsername("xxx"), [])
+    mj.toBeArray(_bt.fetchTweetByUsername('xxx'), [])
   ],
   _result, _passCb
 )
 _total += 1
 mj.test(
-  'C3.1-获取微博-用户存在',
+  'C3.2-获取微博-用户存在',
   [
-    mj.toBeArray(_bt.fetchTweetByUsername("test3"), []),
-    mj.toHaveLength(_bt.fetchTweetByUsername("test2"), 1)
+    mj.toBeArray(_bt.fetchTweetByUsername('test3'), []),
+    mj.toHaveLength(_bt.fetchTweetByUsername('test2'), 1)
   ],
   _result, _passCb
 )

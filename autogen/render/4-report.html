@@ -7,7 +7,7 @@
 	<title>测试总结报告</title>
 	<link rel="stylesheet" href="../lib/bootstrap.min.css">
 	<script type="text/javascript" src="../lib/marked.min.js"></script>
-	<script type="text/javascript" src="../js/4-report/writer.js"></script>
+	<script type="text/javascript" src="../js/4-report.js"></script>
 	<script type="text/javascript" src="../lib/echarts.min.js"></script>
 	<script src="../lib/jspdf.debug.js"></script>
 	<script src="../lib/html2canvas.js"></script>
@@ -84,6 +84,7 @@
 					]
 				}]
 			})
+			document.querySelector('table').className = "table table-bordered"
 		}
 	</script>
 	<style>
@@ -107,15 +108,24 @@
 			padding-top: 3px;
 			padding-bottom: 3px;
 		}
+
+		.submitBtn {
+			width: 150px;
+			height: 70px;
+			font-size: 18px;
+		}
+
+		h2 {
+			font-weight: bold;
+		}
 	</style>
 </head>
 
 <body>
 	<div id="reportDiv"></div>
 	<div style="margin: 40px auto;"></div>
-	<div style="text-align: right;">
-		<button onclick="div2pdf('reportDiv', '测试总结报告')" class="btn btn-primary"
-			style="width: 120px; height: 50px; margin-right: 150px;">保存报告</button>
+	<div style="text-align: right; margin: 0 auto; width: 80%;">
+		<button onclick="div2pdf('reportDiv', '测试总结报告')" class="submitBtn btn btn-primary">保存报告</button>
 	</div>
 	<div style="margin: 80px auto;"></div>
 </body>

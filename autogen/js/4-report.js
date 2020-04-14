@@ -3,6 +3,7 @@
 // ========================
 
 var isResultAnalyzed = false
+var md
 
 async function getText(inputId) {
 	return new Promise((resolve, reject) => {
@@ -91,6 +92,7 @@ async function generateReport() {
 		return
 	}
 	sessionStorage.setItem("reportJSON", JSON.stringify(await HTML2JSON()))
+	sessionStorage.setItem("bugsDetailMarkdown", md)
 	window.location.href = "../render/4-report.html"
 }
 
@@ -142,6 +144,7 @@ function JSON2HTML(json) {
 	markdown += "<div id=\"bugsModuleChartDiv\" style=\"width: 600px;height:400px;\"></div>\n\n"
 	markdown += "<div id=\"bugsRateChartDiv\" style=\"width: 600px;height:400px;\"></div>\n\n"
 	markdown += "### 3.2 Bug详情\n\n"
+	markdown += sessionStorage.getItem('bugsDetailMarkdown')
 	markdown += "### 3.3 Bug分析\n\n"
 	markdown += json.testResult.bugsAnalysis + "\n\n"
 	markdown += "## 四、测试结论\n\n"
@@ -151,16 +154,36 @@ function JSON2HTML(json) {
 	return marked(markdown)
 }
 
-function renderBugsDetail() {
+async function analyzeDesc() {
 	let result = JSON.parse(await getText('resultInput'))["result"]
 	let desc = JSON.parse(await getText('descInput'))["cases"]
 	let bugged = []
 	for (let i = 0; i < result.length; i++) {
+		// every case
 		for (let j = 0; j < result[i]['body'].length; j++) {
+			// every step
 			if (result[i]['body'][j] == 'FAIL') {
-				// TODO: Detail logic.
+				let bug = Object.assign({}, { name: result[i]['description'] }, desc[result[i]['description']][j])
+				bugged.push(bug)
 			}
 		}
 	}
-
+	// 生成Bug详情信息
+	md = `
+| 用例描述                   | 用例详情                   | 断言类型                     | 期望值                     |
+| -------------------------- | -------------------------- | ------------------------ | ------------------------ |
+`
+	bugged.forEach(bug => {
+		md += '| '
+		md += bug.name
+		md += ' | '
+		md += bug.func
+		md += ' | '
+		md += bug.type
+		md += ' | '
+		md += bug.expect
+		md += ' |\n'
+	})
+	document.getElementById('bugsDetailRender').innerHTML = marked(md)
+	document.querySelector('#bugsDetailRender table').className = 'table table-bordered'
 }

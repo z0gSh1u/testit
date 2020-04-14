@@ -92,11 +92,14 @@ function addStep(id) {
   functions.forEach((v, i) => {
     testfuncDom.options[i] = new Option(v.funcName, v.funcName)
   })
-  testfuncDom.onchange = function (ev) {
-    let selectedFuncParams = functions[testfuncDom.selectedIndex].paramNames
-    let paramInputDom = document.getElementById(`param_${id}_${caseStep[id]}`)
-    paramInputDom.value = JSON.stringify(selectedFuncParams, null, 2)
-  }
+  testfuncDom.onchange = (function (_id, _caseStepOfId) {
+    let that = document.getElementById(`testfunc_${_id}_${_caseStepOfId}`)
+    return function (ev) {
+      let selectedFuncParams = functions[that.selectedIndex].paramNames
+      let paramInputDom = document.getElementById(`param_${_id}_${_caseStepOfId}`)
+      paramInputDom.value = JSON.stringify(selectedFuncParams, null, 2)
+    }
+  })(id, caseStep[id])
   testfuncDom.onchange.call(document)
 }
 
@@ -133,7 +136,7 @@ function addCase() {
 /**
  * 生成脚本
  */
-function generate() {
+function generate(nosave) {
   let template_prefix = `
 // Mini-jest test script.
 // auto-gen
@@ -168,7 +171,8 @@ mj.${caseType} (
   _bt.${caseFunc}(${formatParam}), ${caseExpect}
 ),
 `
-      if (j === 1) {
+      if (j == 1) {
+        console.log("init ", caseName)
         description[caseName] = []
       }
       description[caseName].push({
@@ -195,8 +199,10 @@ _total += 1
     mj.dump(_toDump, _dumpPlace, _projectName)
 `
   let summary = template_prefix + template_head + template_body + template_tail
-  saveShareContent(summary, `${projectName}.test.js`)
-  alert('测试脚本保存成功，请到本地执行。')
+  if (!nosave) {
+    saveShareContent(summary, `${projectName}.test.js`)
+    alert('测试脚本保存成功，请到本地执行。')
+  }
 }
 
 function saveShareContent(content, fileName) {
@@ -213,6 +219,7 @@ function saveShareContent(content, fileName) {
  * 生成描述文件
  */
 function generateDesc() {
+  generate(true)
   let projectName = document.getElementById('projectName').value
   let jsonString = JSON.stringify({ cases: description }, null, 2)
   saveShareContent(jsonString, `${projectName}_MJDesc.json`)

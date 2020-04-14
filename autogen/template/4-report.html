@@ -6,10 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>测试总结报告生成</title>
 	<link rel="stylesheet" href="../lib/bootstrap.min.css">
-	<script type="text/javascript" src="../js/template.js"></script>
 	<script type="text/javascript" src="../js/4-report.js"></script>
+	<script type="text/javascript" src="../js/template.js"></script>
 	<script type="text/javascript" src="../lib/echarts.min.js"></script>
-
+	<script type="text/javascript" src="../lib/marked.min.js"></script>
 	<style>
 		.container {
 			width: 70%;
@@ -43,7 +43,7 @@
 
 <body>
 	<center>
-		<h3>测试总结报告生成</h3>
+		<h2>测试总结报告生成</h2>
 		<a href="../index.html">返回首页</a>
 	</center>
 	<div class="container">
@@ -68,7 +68,7 @@
 		<input type="file" id="resultInput" style="display: inline-block; width: 500px;"><br>
 		<span>测试脚本描述JSON文件(_MJDesc.json)...</span><input type="file" id="descInput"
 			style="display: inline-block; width: 500px;"><br>
-		<button onclick="analyzeResult('resultInput', 'bugsModuleChartDiv', 'bugsRateChartDiv'); analyzeDesc();"
+		<button onclick="analyzeResult('resultInput', 'bugsModuleChartDiv', 'bugsRateChartDiv');analyzeDesc();"
 			class="btn btn-default">
 			开始分析
 		</button>
@@ -79,42 +79,38 @@
 
 		<h4>测试概要</h4>
 		<p class="paragraph">&emsp;&emsp;
-			<input type="text" id="projectNameTextInTestSummary" style="width: 150px;" />软件测试从
-			<input type="month" id="beginMonth" />开始，到
-			<input type="month" id="endMonth" />结束。共有测试功能点
-			<input type="text" id="functionAmtText" />个，执行
-			<input type="text" id="caseAmtText" />个测试用例，平均每个功能点执行测试用例
-			<input type="text" id="CPFText" />个。测试共发现
-			<input type="text" id="BugAmtText" />个Bug，平均每个测试功能点
-			<input type="text" id="BPFAmtText" />个Bug。测试用例整体通过率为
-			<input type="text" id="passRateText" />%。
+			<input type="text" id="projectNameTextInTestSummary" style="width: 150px;">软件测试从
+			<input type="month" id="beginMonth">开始，到
+			<input type="month" id="endMonth">结束。共有测试功能点
+			<input type="text" id="functionAmtText">个，执行
+			<input type="text" id="caseAmtText">个测试用例，平均每个功能点执行测试用例
+			<input type="text" id="CPFText">个。测试共发现
+			<input type="text" id="BugAmtText">个Bug，平均每个测试功能点
+			<input type="text" id="BPFAmtText">个Bug。测试用例整体通过率为
+			<input type="text" id="passRateText">%。
 		</p>
-		<textarea id="testSummaryTextarea" rows="7"></textarea>
-		<br>
+		<textarea id="testSummaryTextarea" rows="7" class="form-control" placeholder="补充说明..."></textarea>
 
 		<hr>
 
-		<h4>测试结果</h4>
-		<h4><b>Bug分布</b></h4><br>
+		<h4>测试结果（自动生成）</h4>
+		<h4><b>Bug分布</b></h4>
 		<div id="bugsModuleChartDiv"></div>
 		<div id="bugsRateChartDiv"></div>
 		<h4><b>Bug详情</b></h4>
-		<!-- TODO: Render this. -->
-		
+		<div id="bugsDetailRender"></div>
 		<h4><b>Bug分析</b></h4>
-		<textarea id="bugsAnalysisTextarea" rows="7"></textarea>
-		<br>
+		<textarea id="bugsAnalysisTextarea" rows="7" class="form-control" placeholder="Bug分析..."></textarea>
 
 		<hr>
 
 		<h4>测试结论</h4>
-		<textarea id="testConclusionTextarea" rows="7"></textarea>
-		<br>
+		<textarea id="testConclusionTextarea" rows="7" class="form-control"></textarea>
 
 		<hr>
 
 		<h4>建议</h4>
-		<textarea id="adviceTextarea" rows="7"></textarea>
+		<textarea id="adviceTextarea" rows="7" class="form-control"></textarea>
 		<hr>
 
 		<div style="text-align: right;">

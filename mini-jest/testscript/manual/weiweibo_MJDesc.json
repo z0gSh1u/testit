@@ -5,6 +5,128 @@
         "type": "toBe",
         "func": "newUser('test', 'zhuoxu', '13912345678', 'a@b.com', '20')",
         "expect": "0"
+      },
+      {
+        "type": "toBe",
+        "func": "newUser('test', 'zhuoxu', '13912345678', 'a@b.com', '20')",
+        "expect": "1"
+      }
+    ],
+    "C1.2-用户注册-用户名不合规": [
+      {
+        "type": "toBe",
+        "func": "newUser('123%abc', 'zhuoxu', '13912345678', 'a@b.com', '20')",
+        "expect": "2"
+      },
+      {
+        "type": "toBe",
+        "func": "newUser('aaaaaaaaaab', 'zhuoxu', '13912345678', 'a@b.com', '20')",
+        "expect": "2"
+      }
+    ],
+    "C1.3-用户注册-密码不合规": [
+      {
+        "type": "toBe",
+        "func": "newUser('test0', '123456', '13912345678', 'a@b.com', '20')",
+        "expect": "3"
+      },
+      {
+        "type": "toBe",
+        "func": "newUser('test0', 'abc', '13912345678', 'a@b.com', '20')",
+        "expect": "3"
+      },
+      {
+        "type": "toBe",
+        "func": "newUser('test0', '123456789012345678901', '13912345678', 'a@b.com', '20')",
+        "expect": "3"
+      }
+    ],
+    "C1.4-用户注册-手机号不合规": [
+      {
+        "type": "toBe",
+        "func": "newUser('test0', 'zhuoxu', '66612345678', 'a@b.com', '20')",
+        "expect": "4"
+      },
+      {
+        "type": "toBe",
+        "func": "newUser('test0', 'zhuoxu', '139123456789', 'a@b.com', '20')",
+        "expect": "4"
+      },
+      {
+        "type": "toBe",
+        "func": "newUser('test0', 'zhuoxu', '1391234567', 'a@b.com', '20')",
+        "expect": "4"
+      }
+    ],
+    "C1.5-用户注册-电子邮箱不合规": [
+      {
+        "type": "toBe",
+        "func": "newUser('test0', 'zhuoxu', '13912345678', 'test@baidu', '20')",
+        "expect": "5"
+      }
+    ],
+    "C1.6-用户注册-年龄不合规": [
+      {
+        "type": "toBe",
+        "func": "newUser('test0', 'zhuoxu', '13912345678', 'a@b.com', '201')",
+        "expect": "6"
+      },
+      {
+        "type": "toBe",
+        "func": "newUser('test0', 'zhuoxu', '13912345678', 'a@b.com', '-1')",
+        "expect": "6"
+      }
+    ],
+    "C1.7-用户注册-正常注册": [
+      {
+        "type": "toBe",
+        "func": "newUser('test2', 'southeast', '13898765432', 'hello@xxx.edu.hk', '30')",
+        "expect": "6"
+      }
+    ],
+    "C2.1-发送新微博-用户不存在": [
+      {
+        "type": "toBe",
+        "func": "newTweet('xxx', 'abcdefg')",
+        "expect": "2"
+      }
+    ],
+    "C2.2-发送新微博-微博长度不正确": [
+      {
+        "type": "toBe",
+        "func": "newTweet('test2', '')",
+        "expect": "1"
+      },
+      {
+        "type": "toBe",
+        "func": "newTweet('test2','一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十补')",
+        "expect": "1"
+      }
+    ],
+    "C2.3-发送新微博-正常发送": [
+      {
+        "type": "toBe",
+        "func": "newTweet('test2', '一二三四五六七八九十一二三四五六七八九十')",
+        "expect": "0"
+      }
+    ],
+    "C3.1-获取微博-用户不存在": [
+      {
+        "type": "toBeArray",
+        "func": "fetchTweetByUsername('xxx')",
+        "expect": "[]"
+      }
+    ],
+    "C3.2-获取微博-用户存在": [
+      {
+        "type": "toBeArray",
+        "func": "fetchTweetByUsername('test3')",
+        "expect": "[]"
+      },
+      {
+        "type": "toHaveLength",
+        "func": "fetchTweetByUsername('test2')",
+        "expect": "1"
       }
     ]
   }
