@@ -1,0 +1,21 @@
+{
+  "cases": {
+    "C1.1-用户注册": [
+      {
+        "type": "toBe",
+        "func": "newUser('zhuoxu1','zhuoxu','19987654321','abc.123@qq.com.cn','20')",
+        "expect": "0"
+      },
+      {
+        "type": "toBe",
+        "func": "newTweet('zhuoxu1','Hello')",
+        "expect": "0"
+      },
+      {
+        "type": "toHaveLength",
+        "func": "fetchTweetByUsername('zhuoxu1')",
+        "expect": "1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "mjInfo": "mini-jest 0.1",
+  "projectName": "weiweibo",
+  "passRate": 0,
+  "result": [
+    {
+      "description": "C1.1-用户注册",
+      "body": [
+        "FAIL",
+        "FAIL",
+        "FAIL"
+      ]
+    }
+  ]
+}

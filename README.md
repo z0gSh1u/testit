@@ -20,12 +20,11 @@
 
 ## 如何开始
 
-- 安装Node.js运行环境
-
-  https://nodejs.org/zh-cn/
+- 安装Node.js运行环境：https://nodejs.org/zh-cn/
 
 - 在项目根目录执行`npm install`安装项目
-
 - 在项目根目录执行`npm run serve`启动项目
-
 - 自动化测试系统将在`localhost:8888`上运行
+- 最后，请使用下列链接之一查看演示视频：
+  - http://localhost:8888/help.html
+  - http://zxuuu.tech/share/static/testit_demo.mp4
