@@ -27,4 +27,4 @@
 - 自动化测试系统将在`localhost:8888`上运行
 - 最后，请使用下列链接之一查看演示视频：
   - http://localhost:8888/help.html
-  - http://zxuuu.tech:8008/share/static/testit_demo.mp4
+  - https://zxuuu.tech/static/testit_demo.mp4
